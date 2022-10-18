@@ -56,6 +56,30 @@ describe("Filtering", () => {
     });
   });
   describe("Combined genre and title", () => {
-    // TODO
+    it("search for 'fullmetal' in the title of movies & filter by 'action' genre", () => {
+        const searchString = "fullmetal";
+        const matchingMovies = filterByTitle(movies, searchString);
+        cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+        cy.get(".MuiCardHeader-content").should(
+          "have.length",
+          matchingMovies.length
+        );
+        cy.get(".MuiCardHeader-content").each(($card, index) => {
+          cy.wrap($card).find("p").contains(matchingMovies[index].title);
+        });
+
+        const selectedGenreId = 28;
+        const selectedGenreText = "Action";
+        const matchingMoviesG = filterByGenre(movies, selectedGenreId);
+        cy.get("#genre-select").click();
+        cy.get("li").contains(selectedGenreText).click();
+        cy.get(".MuiCardHeader-content").should(
+          "have.length",
+          matchingMovies.length
+        );
+        cy.get(".MuiCardHeader-content").each(($card, index) => {
+          cy.wrap($card).find("p").contains(matchingMoviesG[index].title);
+        });
+      });
   });
 });
