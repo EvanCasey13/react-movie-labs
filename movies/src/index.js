@@ -6,6 +6,7 @@ import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import SiteHeader from './components/siteHeader'
+import AddMovieReviewPage from './pages/addMovieReviewPage'
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { createRoot } from "react-dom/client";
@@ -30,6 +31,7 @@ const App = () => {
     <MoviesContextProvider>
     <Routes>
       <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+      <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
       <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
       <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
       <Route path="/movies/:id" element={<MoviePage />} />
